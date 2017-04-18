@@ -13,7 +13,7 @@ import CoreData
 class coreDataHandler: NSObject {
     
     
-    var lastID:Int32 = 0
+   // var lastID:Int32 = 0
 
     func saveWorkout (workout: workoutModel){
        
@@ -21,29 +21,20 @@ class coreDataHandler: NSObject {
             return
         }
         
+//        /   let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: true, wrktId: lstId)
+        
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
         let wrkt = NSManagedObject(entity: entity!, insertInto: managedContext)
-        wrkt.setValue(lastID, forKey: "id")
+        wrkt.setValue(workout.wrktId, forKey: "id")
         wrkt.setValue(workout.name, forKey: "name")
-        wrkt.setValue(workout.name, forKey: "name")
-        wrkt.setValue(workout.name, forKey: "name")
+        wrkt.setValue(workout.repSet, forKey: "repSet")
+        wrkt.setValue(workout.defDur, forKey: "defDur")
+        wrkt.setValue(workout.defSets, forKey: "defSets")
+        wrkt.setValue(workout.defReps, forKey: "defReps")
         
-//        for rest in restaurants {
-//            
-//            let entity = NSEntityDescription.entity(forEntityName: "Restaurant", in: managedContext)
-//            
-//            let restaurant = NSManagedObject(entity: entity!, insertInto: managedContext)
-//
-//            restaurant.setValue(rest.address, forKey: "address")
-//            restaurant.setValue(rest.name, forKey: "name")
-//            restaurant.setValue(rest.id, forKey: "id")
-//            restaurant.setValue(rest.longitude, forKey: "longitude")
-//            restaurant.setValue(rest.latitude, forKey: "latitude")
-//            restaurant.setValue(rest.image, forKey: "photo")
-//   
-//        }
+        print("\n ***** Core data saving ***** \n")
         
         
         do{
@@ -54,33 +45,38 @@ class coreDataHandler: NSObject {
         }
     }
     
-//    func loadCoreData()->[Restaurant]{
-//        
-//        var restaurants = [Restaurant]()
-//        
-//        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-//        
-//        let managedContext = appDelegate?.persistentContainer.viewContext
-//        
-//        do{
-//            let fetchRequest : NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
-//            
-//            let result = try managedContext?.fetch(fetchRequest)
-//            
-//            for res in result! {
-//                restaurants.append(res)
-//            }
-//            self.lastID = (restaurants.last?.id)!
-//            return restaurants
-//            
-//        }
-//        catch {
-//            fatalError("Error while trying to get core data")
-//        }
-//        print("Restaurants = \(restaurants[0])")
-//        return restaurants
-//    }
-//    
+    func loadCoreData()->[Workout]{
+        
+        var workouts = [Workout]()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        let managedContext = appDelegate?.persistentContainer.viewContext
+        
+        do{
+            let fetchRequest : NSFetchRequest<Workout> = Workout.fetchRequest()
+            
+            let result = try managedContext?.fetch(fetchRequest)
+            print("Dildo")
+            for wrkt in result! {
+                workouts.append(wrkt)
+            }
+          //  self.lastID = (restaurants.last?.id)!
+            
+            for wrkt in workouts{
+                print("\n core data load workouts are \(wrkt.name!) \n")
+            }
+            
+            return workouts
+            
+        }
+        catch {
+            fatalError("Error while trying to get core data")
+        }
+        print("Restaurants = \(workouts[0])")
+        return workouts
+    }
+    
     func getLastId(forKey key: String)->Int32{
         
         var lastId = Int32()

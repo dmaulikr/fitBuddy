@@ -19,13 +19,20 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var createBtn: UIButton!
     //fetch workouts in array
-    var mockWorkoutsOfTraining = ["Benchpress","Incline bench press","Dumbell incline press","Dumbbell spread","Dips","Frenchpress","Biceps","Cable shoulder pull","Squats", "Legpress", "Lunges","Romanian deadlift", "Pull ups","Deadlift", "Biceps curl"]
-    
+//    var mockWorkoutsOfTraining = ["Benchpress","Incline bench press","Dumbell incline press","Dumbbell spread","Dips","Frenchpress","Biceps","Cable shoulder pull","Squats", "Legpress", "Lunges","Romanian deadlift", "Pull ups","Deadlift", "Biceps curl"]
+    var mockWorkoutsOfTraining = [Workout](){
+        didSet{
+           // mockWorkoutsOfTraining.sort{$0 < $1}
+            workoutsTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mockWorkoutsOfTraining.sort{$0 < $1}
+        
         createBtn.layer.cornerRadius = 12
+        let cdh = coreDataHandler()
+        mockWorkoutsOfTraining = cdh.loadCoreData()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,7 +43,7 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = workoutsTableView.dequeueReusableCell(withIdentifier: "cell") as! addTrainingTableViewCell
-        cell.workoutTitle.text = mockWorkoutsOfTraining[indexPath.row]
+        cell.workoutTitle.text = mockWorkoutsOfTraining[indexPath.row].name!//
         return cell
     }
    

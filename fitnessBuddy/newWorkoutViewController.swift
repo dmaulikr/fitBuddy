@@ -46,7 +46,11 @@ class newWorkoutViewController: UIViewController {
 
     @IBAction func createWorkout(_ sender: Any) {
         
-        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: true)
+        
+        let cdh = coreDataHandler()
+        var lstId = cdh.getLastId(forKey: "id")
+        
+        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: true, wrktId: lstId)
         
         
         print("You've created a workout \(workoutForSaving.name)that uses \(repsDurToggle) value")
@@ -55,12 +59,13 @@ class newWorkoutViewController: UIViewController {
         //input validation za reps dur
         
         //store to core data - OVO STAVI NA BACKGROUND THREAD
-        let cdh = coreDataHandler()
-        var lstId = cdh.getLastId(forKey: "id")
+     
         print("The last id is \(lstId)")
         
+        cdh.saveWorkout(workout: workoutForSaving)
+        
         //OVO STAVI U COMPLETION - kad kreiraš workout moraš ga switchati na prvi tabview i po mogućnosti obilježi tu novu vježbu
-        self.tabBarController?.selectedIndex = 0
+       // self.tabBarController?.selectedIndex = 0
     
     }
     

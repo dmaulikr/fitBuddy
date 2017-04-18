@@ -14,14 +14,16 @@ class workoutModel: NSObject {
     let defSets: Int32
     let name: String
     let repSet: Bool
+    let wrktId:Int32
     
-    init(wrktDuration:Double, wrktReps:Int32, wrktSets:Int32, wrktName:String, zeroIsRepsOneIsSets repsOrSets:Bool){
+    init(wrktDuration:Double, wrktReps:Int32, wrktSets:Int32, wrktName:String, zeroIsRepsOneIsSets repsOrSets:Bool, wrktId:Int32){
         
         self.defDur = wrktDuration
         self.defReps=wrktReps
         self.defSets = wrktSets
         self.name = wrktName
         self.repSet = repsOrSets
+        self.wrktId = wrktId
     }
     
 
