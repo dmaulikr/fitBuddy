@@ -15,7 +15,7 @@ class coreDataHandler: NSObject {
     
    // var lastID:Int32 = 0
 
-    func saveWorkout (workout: workoutModel){
+    func saveWorkout (workout: workoutModel, completion:()->()){
        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return

@@ -16,10 +16,6 @@ class extensionsForViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
  
   
 
@@ -34,5 +30,28 @@ extension UIViewController {
 //        
 //        
 //    }
+
+}
+
+extension UIView{
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 3
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(x: self.center.x - 10, y:self.center.y)
+        animation.toValue = CGPoint(x: self.center.x + 10, y:self.center.y)
+        self.layer.add(animation, forKey: "position")
+    }
+    func shake2() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.06
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(x: self.center.x - 15, y:self.center.y)
+        animation.toValue = CGPoint(x: self.center.x + 15, y:self.center.y)
+        self.layer.add(animation, forKey: "position")
+    }
+
 
 }

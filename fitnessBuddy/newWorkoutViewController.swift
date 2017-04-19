@@ -28,12 +28,17 @@ class newWorkoutViewController: UIViewController {
         didSet{
             if selectedIndexRepsDur == 0{
                 repsOrDurationLabel.text = "Reps"
+                repsOrDur = false
             }
             else{
                 repsOrDurationLabel.text = "Duration"
+                repsOrDur = true
             }
         }
     }
+    
+    //reps = false, duration = true
+    var repsOrDur = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +49,35 @@ class newWorkoutViewController: UIViewController {
         
     }
 
+    
+
     @IBAction func createWorkout(_ sender: Any) {
         
         
+        
+        if (sets.text?.isEmpty)! {
+            self.sets.layer.borderColor = UIColor.orange.cgColor
+            self.sets.layer.borderWidth = 2
+            self.sets.shake()
+            self.repsDur.layer.borderColor = UIColor.orange.cgColor
+            self.repsDur.layer.borderWidth = 2
+            self.repsDur.shake()
+            self.workoutName.layer.borderColor = UIColor.orange.cgColor
+            self.workoutName.layer.borderWidth = 2
+            self.workoutName.shake()
+        }
+        
+        else{
+        DispatchQueue.global(qos: .background).async {
         let cdh = coreDataHandler()
         var lstId = cdh.getLastId(forKey: "id")
+      
+            
+            
+        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: lstId)
         
-        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: true, wrktId: lstId)
         
-        
-        print("You've created a workout \(workoutForSaving.name)that uses \(repsDurToggle) value")
+        print("You've created a workout \(workoutForSaving.name)that uses \(self.repsDurToggle) value")
      
     
         //input validation za reps dur
@@ -62,11 +86,14 @@ class newWorkoutViewController: UIViewController {
      
         print("The last id is \(lstId)")
         
-        cdh.saveWorkout(workout: workoutForSaving)
+    
+        cdh.saveWorkout(workout: workoutForSaving, completion: {
+            print("SAVED TO CORE DATA COMPLETION")
+            self.tabBarController?.selectedIndex = 0
+        })}
         
         //OVO STAVI U COMPLETION - kad kreiraš workout moraš ga switchati na prvi tabview i po mogućnosti obilježi tu novu vježbu
-       // self.tabBarController?.selectedIndex = 0
-    
+            self.tabBarController?.selectedIndex = 0}
     }
     
     func dismissKeyboard(){

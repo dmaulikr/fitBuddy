@@ -27,10 +27,17 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        workoutsTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        workoutsTableView.reloadData()
         createBtn.layer.cornerRadius = 12
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         let cdh = coreDataHandler()
         mockWorkoutsOfTraining = cdh.loadCoreData()
     }
@@ -45,6 +52,9 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = workoutsTableView.dequeueReusableCell(withIdentifier: "cell") as! addTrainingTableViewCell
         cell.workoutTitle.text = mockWorkoutsOfTraining[indexPath.row].name!//
         return cell
+    }
+    func dismissKeyboard(){
+        view.endEditing(true)
     }
    
 }
