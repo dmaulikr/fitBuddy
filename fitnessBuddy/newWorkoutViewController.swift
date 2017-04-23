@@ -56,6 +56,7 @@ class newWorkoutViewController: UIViewController {
         
         
         if (sets.text?.isEmpty)! {
+            
             self.sets.layer.borderColor = UIColor.orange.cgColor
             self.sets.layer.borderWidth = 2
             self.sets.shake()

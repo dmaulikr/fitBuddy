@@ -10,6 +10,7 @@
 		A40A37B61EA4E55800D03496 /* coreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A37B51EA4E55800D03496 /* coreDataHandler.swift */; };
 		A40A37B91EA4E60500D03496 /* workoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A37B81EA4E60500D03496 /* workoutModel.swift */; };
 		A40B3DBE1EA40A21000CD650 /* extensionsForViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B3DBD1EA40A21000CD650 /* extensionsForViewController.swift */; };
+		A418F8C21EAD1D7F0030B4BD /* trainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A418F8C11EAD1D7F0030B4BD /* trainingModel.swift */; };
 		A4506CD21EA24256000CA936 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4506CD11EA24255000CA936 /* MainViewController.swift */; };
 		A4506CD41EA25099000CA936 /* gradientCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4506CD31EA25099000CA936 /* gradientCode.swift */; };
 		A4506CD71EA2514D000CA936 /* TrainingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4506CD61EA2514D000CA936 /* TrainingCollectionViewCell.swift */; };
@@ -32,6 +33,7 @@
 		A40A37B51EA4E55800D03496 /* coreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreDataHandler.swift; sourceTree = "<group>"; };
 		A40A37B81EA4E60500D03496 /* workoutModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workoutModel.swift; sourceTree = "<group>"; };
 		A40B3DBD1EA40A21000CD650 /* extensionsForViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensionsForViewController.swift; sourceTree = "<group>"; };
+		A418F8C11EAD1D7F0030B4BD /* trainingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trainingModel.swift; sourceTree = "<group>"; };
 		A4506CD11EA24255000CA936 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A4506CD31EA25099000CA936 /* gradientCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gradientCode.swift; sourceTree = "<group>"; };
 		A4506CD61EA2514D000CA936 /* TrainingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				A40A37B51EA4E55800D03496 /* coreDataHandler.swift */,
+				A418F8C11EAD1D7F0030B4BD /* trainingModel.swift */,
 				A40A37B81EA4E60500D03496 /* workoutModel.swift */,
 			);
 			name = Model;
@@ -226,6 +229,7 @@
 				A4EE3B801EA38B2800E99DEF /* newTrainingViewController.swift in Sources */,
 				A45826211EA166B900B26A5C /* AppDelegate.swift in Sources */,
 				A4506CD21EA24256000CA936 /* MainViewController.swift in Sources */,
+				A418F8C21EAD1D7F0030B4BD /* trainingModel.swift in Sources */,
 				A4EE3B8A1EA3E79C00E99DEF /* addTrainingTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

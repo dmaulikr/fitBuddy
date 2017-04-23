@@ -21,9 +21,6 @@ class coreDataHandler: NSObject {
             return
         }
         
-//        /   let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: true, wrktId: lstId)
-        
-        
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
         let wrkt = NSManagedObject(entity: entity!, insertInto: managedContext)
@@ -45,6 +42,8 @@ class coreDataHandler: NSObject {
         }
     }
     
+    
+    //make this generic
     func loadCoreData()->[Workout]{
         
         var workouts = [Workout]()
@@ -62,11 +61,7 @@ class coreDataHandler: NSObject {
                 workouts.append(wrkt)
             }
           //  self.lastID = (restaurants.last?.id)!
-            
-            for wrkt in workouts{
-                print("\n core data load workouts are \(wrkt.name!) \n")
-            }
-            
+        
             return workouts
             
         }
@@ -98,6 +93,65 @@ class coreDataHandler: NSObject {
         }
         return lastId
     }
+    
+    
+    // training
+    
+    func loadTrainingData()->[Training]{
+        
+        var trainings = [Training]()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        let managedContext = appDelegate?.persistentContainer.viewContext
+        
+        do{
+            let fetchRequest : NSFetchRequest<Training> = Training.fetchRequest()
+            
+            let result = try managedContext?.fetch(fetchRequest)
+            print("********** \n Loading trainings \n **********")
+            for training in result! {
+                trainings.append(training)
+            }
+            //  self.lastID = (restaurants.last?.id)!
+            
+            return trainings
+            
+        }
+        catch {
+            fatalError("Error while trying to get core data")
+        }
+     
+        return trainings
+    }
+    
+    func saveTraining (training: workoutModel, completion:()->()){
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
+        let wrkt = NSManagedObject(entity: entity!, insertInto: managedContext)
+//        wrkt.setValue(workout.wrktId, forKey: "id")
+//        wrkt.setValue(workout.name, forKey: "name")
+//        wrkt.setValue(workout.repSet, forKey: "repSet")
+//        wrkt.setValue(workout.defDur, forKey: "defDur")
+//        wrkt.setValue(workout.defSets, forKey: "defSets")
+//        wrkt.setValue(workout.defReps, forKey: "defReps")
+        
+        print("\n ***** Core data saving ***** \n")
+        
+        
+        do{
+            try managedContext.save()
+            
+        }catch let error as NSError{
+            print("Can't save due to \(error)")
+        }
+    }
+
     
 //    func addPhotoToRestaurant(markerID: Int32, photoAddress:String){
 //    
