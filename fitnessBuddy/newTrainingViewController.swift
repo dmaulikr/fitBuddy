@@ -11,6 +11,7 @@ import UIKit
 class newTrainingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var workoutsTableView: UITableView!
+    let selectionButton = CheckBox()
     
     @IBAction func closeWindow(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -50,11 +51,16 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = workoutsTableView.dequeueReusableCell(withIdentifier: "cell") as! addTrainingTableViewCell
-        cell.workoutTitle.text = mockWorkoutsOfTraining[indexPath.row].name!//
+        cell.workoutTitle.text = mockWorkoutsOfTraining[indexPath.row].name!
+        cell.isSelected = true
         return cell
     }
     func dismissKeyboard(){
         view.endEditing(true)
     }
+    @IBAction func createTraining(_ sender: Any) {
+        
+    }
+  
    
 }

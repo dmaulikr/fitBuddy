@@ -11,6 +11,8 @@ import UIKit
 class addTrainingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var workoutTitle: UILabel!
+    @IBOutlet weak var workoutSelectionIndicator: CheckBox!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,5 +23,7 @@ class addTrainingTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+
 
 }

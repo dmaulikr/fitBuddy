@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A402C21C1EAE7007002290C5 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A402C21B1EAE7007002290C5 /* Checkbox.swift */; };
 		A40A37B61EA4E55800D03496 /* coreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A37B51EA4E55800D03496 /* coreDataHandler.swift */; };
 		A40A37B91EA4E60500D03496 /* workoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A37B81EA4E60500D03496 /* workoutModel.swift */; };
 		A40B3DBE1EA40A21000CD650 /* extensionsForViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B3DBD1EA40A21000CD650 /* extensionsForViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A402C21B1EAE7007002290C5 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		A40A37B51EA4E55800D03496 /* coreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coreDataHandler.swift; sourceTree = "<group>"; };
 		A40A37B81EA4E60500D03496 /* workoutModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workoutModel.swift; sourceTree = "<group>"; };
 		A40B3DBD1EA40A21000CD650 /* extensionsForViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensionsForViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A402C21D1EAE7F99002290C5 /* Accessories classes */ = {
+			isa = PBXGroup;
+			children = (
+				A45826351EA16DCB00B26A5C /* CirclePath.swift */,
+				A402C21B1EAE7007002290C5 /* Checkbox.swift */,
+				A4506CD31EA25099000CA936 /* gradientCode.swift */,
+			);
+			name = "Accessories classes";
+			sourceTree = "<group>";
+		};
 		A40A37B71EA4E55E00D03496 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,14 +116,13 @@
 		A458261F1EA166B900B26A5C /* fitnessBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				A402C21D1EAE7F99002290C5 /* Accessories classes */,
 				A40A37B71EA4E55E00D03496 /* Model */,
 				A45826201EA166B900B26A5C /* AppDelegate.swift */,
 				A4506CD51EA250AE000CA936 /* ViewControllers */,
-				A45826351EA16DCB00B26A5C /* CirclePath.swift */,
 				A45826241EA166B900B26A5C /* Main.storyboard */,
 				A4EE3B871EA3E43600E99DEF /* Create training and workout */,
 				A4EE3B881EA3E45D00E99DEF /* Selected training */,
-				A4506CD31EA25099000CA936 /* gradientCode.swift */,
 				A458262A1EA166B900B26A5C /* Assets.xcassets */,
 				A458262C1EA166B900B26A5C /* LaunchScreen.storyboard */,
 				A458262F1EA166B900B26A5C /* Info.plist */,
@@ -216,6 +227,7 @@
 			files = (
 				A4EE3B861EA3DC7900E99DEF /* trainingTabBarViewController.swift in Sources */,
 				A45826231EA166B900B26A5C /* ViewController.swift in Sources */,
+				A402C21C1EAE7007002290C5 /* Checkbox.swift in Sources */,
 				A40B3DBE1EA40A21000CD650 /* extensionsForViewController.swift in Sources */,
 				A40A37B61EA4E55800D03496 /* coreDataHandler.swift in Sources */,
 				A4EE3B821EA3937A00E99DEF /* newWorkoutViewController.swift in Sources */,
