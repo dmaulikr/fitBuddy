@@ -12,6 +12,9 @@ class addTrainingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var workoutTitle: UILabel!
     @IBOutlet weak var workoutSelectionIndicator: CheckBox!
+    @IBOutlet weak var setsNum: UILabel!
+    @IBOutlet weak var repsDurNum: UILabel!
+    @IBOutlet weak var repsOrDurLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +23,7 @@ class addTrainingTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
     
 

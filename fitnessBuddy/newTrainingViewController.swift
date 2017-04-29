@@ -12,6 +12,7 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var workoutCell: addTrainingTableViewCell!
     @IBOutlet weak var workoutsTableView: UITableView!
+   
     let selectionButton = CheckBox()
     
     @IBAction func closeWindow(_ sender: Any) {
@@ -31,12 +32,17 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         didSet{
            // mockWorkoutsOfTraining.sort{$0 < $1}
             for workout in availableWorkouts {
-                print("\(workout.id)  and  \(workout.name)")
+                print("\(workout.id) and  \(workout.name)")
             }
             workoutsTableView.reloadData()
         }
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("\n ******* View will appear \n")
+        self.workoutsTableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +58,22 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         return availableWorkouts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let workoutToShow = availableWorkouts[indexPath.row]
         let cell = workoutsTableView.dequeueReusableCell(withIdentifier: cells.workoutsTableViewCell.rawValue) as! addTrainingTableViewCell
-        cell.workoutTitle.text = availableWorkouts[indexPath.row].name!
+        cell.workoutTitle.text = workoutToShow.name!
+        cell.setsNum.text = String(workoutToShow.defSets)
+        if !workoutToShow.repSet{
+            cell.repsOrDurLabel.text = "Reps"
+        }else{
+            cell.repsOrDurLabel.text = "Dur"
+        }
+        cell.repsDurNum.text = String(workoutToShow.defReps)
+        
         let isSelected = cell.workoutSelectionIndicator
         if (isSelected?.isChecked)!{
             print ("The cell \(cell.workoutTitle.text!) is selected\n")

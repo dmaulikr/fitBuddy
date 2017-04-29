@@ -15,6 +15,30 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var repsDur: UITextField!
     @IBOutlet weak var repsDurToggle: UISegmentedControl!
     @IBOutlet weak var repsOrDurationLabel: UILabel!
+
+    var reps:Int32?
+    var duration:Double?
+    var setsNo:Int32?
+    
+    var isSuccessfullySaved = false{
+        didSet{
+            print("successfully saved")
+          
+                print("Everything is saved, do something now")
+                let a = coreDataHandler()
+                a.loadCoreData()
+        
+            
+        }
+    }
+    
+    var isSuccessfullyLoaded = false{
+        didSet{
+        
+            
+        }
+    }
+    
     
     enum CoreDataStrings:String {
         case ID = "id"
@@ -30,6 +54,20 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
     @IBAction func repsDurToggleAction(_ sender: UISegmentedControl) {
         selectedIndexRepsDur = sender.selectedSegmentIndex
         print("Selected segment index is \(sender.selectedSegmentIndex)")
+        if selectedIndexRepsDur == 1 {
+            duration = Double(repsDur.text!)
+            setsNo = Int32(sets.text!)
+            reps = 0
+        }else{
+            reps = Int32(repsDur.text!)
+            setsNo = Int32(sets.text!)
+            duration = 0
+        
+        }
+        
+        
+        
+        
     }
  
     @IBOutlet weak var createButton: UIButton!
@@ -67,7 +105,6 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         
         
         if (sets.text?.isEmpty)! {
-            
             self.sets.layer.borderColor = UIColor.orange.cgColor
             self.sets.layer.borderWidth = 2
             self.sets.shake()
@@ -88,33 +125,27 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         let workoutId = Int32(lstId+1)
     
             
-        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: workoutId)
+        let workoutForSaving = workoutModel(wrktDuration: self.duration!, wrktReps: self.reps!, wrktSets: self.setsNo!, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: false, wrktId: workoutId)
             
         //store to core data - OVO STAVI NA BACKGROUND THREAD
         
-            // VRATI SE NA MAIN THREAD DA MOŽEŠ RADITI AKTIVNOSTI PO VIEWU
-            var isSaved = cdh.saveWorkout(workout: workoutForSaving, completion: {
-                DispatchQueue.main.async {
-                    print("Everything is saved, do something now")
-                   
-                    self.reloadTrainingViewTV(completion:{
-                              self.tabBarController?.selectedIndex = 0
-                    }())
-                }
+        // VRATI SE NA MAIN THREAD DA MOŽEŠ RADITI AKTIVNOSTI PO VIEWU
+        self.isSuccessfullySaved = cdh.saveWorkout(workout: workoutForSaving, completion: {
+                    print("\n I am done after workout is saved")
                 }())
-    
-           
-        }
-          
-        
+            
+            }
         }
         
     }
     
     func reloadTrainingViewTV(completion:()){
-        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
-        targetTabVC.workoutsTableView.delegate = self
-        targetTabVC.workoutsTableView.reloadData()
+//        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
+//        targetTabVC.workoutsTableView.delegate = self
+//        let a = coreDataHandler()
+//        a.loadCoreData()
+        //targetTabVC.workoutsTableView.reloadData()
+    
     }
     
     func dismissKeyboard(){

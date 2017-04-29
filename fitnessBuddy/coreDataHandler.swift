@@ -127,10 +127,10 @@ class coreDataHandler: NSObject {
         return trainings
     }
     
-    func saveTraining (training: workoutModel, completion:()->()){
+    func saveTraining (training: workoutModel, completion:())->Bool{
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
+            return false
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -148,9 +148,11 @@ class coreDataHandler: NSObject {
         
         do{
             try managedContext.save()
+            return true
             
         }catch let error as NSError{
             print("Can't save due to \(error)")
+            return false
     
         }
     }
