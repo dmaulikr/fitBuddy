@@ -58,7 +58,7 @@ class coreDataHandler: NSObject {
             let fetchRequest : NSFetchRequest<Workout> = Workout.fetchRequest()
             
             let result = try managedContext?.fetch(fetchRequest)
-            print("Dildo")
+            print("loaded core data")
             for wrkt in result! {
                 workouts.append(wrkt)
             }

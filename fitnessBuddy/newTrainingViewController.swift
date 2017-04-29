@@ -41,7 +41,9 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("\n ******* View will appear \n")
-        self.workoutsTableView.reloadData()
+        let a = coreDataHandler()
+        availableWorkouts = a.loadCoreData()
+       // self.workoutsTableView.reloadData()
     }
     
     override func viewDidLoad() {

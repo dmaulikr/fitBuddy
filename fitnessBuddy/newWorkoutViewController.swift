@@ -10,32 +10,35 @@ import UIKit
 
 class newWorkoutViewController: UIViewController, UITableViewDelegate {
 
+    //outlets
     @IBOutlet weak var workoutName: UITextField!
     @IBOutlet weak var sets: UITextField!
     @IBOutlet weak var repsDur: UITextField!
     @IBOutlet weak var repsDurToggle: UISegmentedControl!
     @IBOutlet weak var repsOrDurationLabel: UILabel!
 
-    var reps:Int32?
-    var duration:Double?
-    var setsNo:Int32?
+    //local variables
+    var reps:Int32 = 0
+    var duration:Double = 0
+    var setsNo:Int32 = 0
     
+    
+    //when core data saves I want to refresh the training data, tableview and switch to that tabbar
     var isSuccessfullySaved = false{
         didSet{
             print("successfully saved")
           
                 print("Everything is saved, do something now")
                 let a = coreDataHandler()
-                a.loadCoreData()
-        
+                isSuccessfullyLoaded = a.loadCoreData()
+            
             
         }
     }
     
-    var isSuccessfullyLoaded = false{
+    var isSuccessfullyLoaded = [Workout](){
         didSet{
-        
-            
+            reloadTrainingViewTV()
         }
     }
     
@@ -55,12 +58,13 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         selectedIndexRepsDur = sender.selectedSegmentIndex
         print("Selected segment index is \(sender.selectedSegmentIndex)")
         if selectedIndexRepsDur == 1 {
-            duration = Double(repsDur.text!)
-            setsNo = Int32(sets.text!)
+            duration = Double(repsDur.text!)!
+            print("Workout sets")
+            setsNo = Int32(self.sets.text!)!
             reps = 0
         }else{
-            reps = Int32(repsDur.text!)
-            setsNo = Int32(sets.text!)
+            reps = Int32(repsDur.text!)!
+            setsNo = Int32(self.sets.text!)!
             duration = 0
         
         }
@@ -72,7 +76,10 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
  
     @IBOutlet weak var createButton: UIButton!
     
-    var selectedIndexRepsDur = 0{
+    //reps = false, duration = true
+    var repsOrDur = false
+    
+    var selectedIndexRepsDur = 0 {
         didSet{
             if selectedIndexRepsDur == 0{
                 repsOrDurationLabel.text = "Reps"
@@ -85,8 +92,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    //reps = false, duration = true
-    var repsOrDur = false
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,9 +129,12 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         let cdh = coreDataHandler()
         let lstId = cdh.getLastId(forKey: CoreDataStrings.ID.rawValue)
         let workoutId = Int32(lstId+1)
-    
+        let setsNum = Int32(self.sets.text!)!
             
-        let workoutForSaving = workoutModel(wrktDuration: self.duration!, wrktReps: self.reps!, wrktSets: self.setsNo!, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: false, wrktId: workoutId)
+        print("Workout for saving are self.duration \(self.duration) \n self.reps \(self.reps) \n zeroIsRepsOneIsSets \(self.repsOrDur) \n wrktSets \(self.setsNo) \n self.sets = \(self.sets.text!)")
+            
+            
+        let workoutForSaving = workoutModel(wrktDuration: self.duration, wrktReps: self.reps, wrktSets: setsNum, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: workoutId)
             
         //store to core data - OVO STAVI NA BACKGROUND THREAD
         
@@ -139,12 +148,12 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         
     }
     
-    func reloadTrainingViewTV(completion:()){
-//        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
-//        targetTabVC.workoutsTableView.delegate = self
+    func reloadTrainingViewTV(){
+        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
+        targetTabVC.workoutsTableView.delegate = self
 //        let a = coreDataHandler()
 //        a.loadCoreData()
-        //targetTabVC.workoutsTableView.reloadData()
+        targetTabVC.workoutsTableView.reloadData()
     
     }
     
