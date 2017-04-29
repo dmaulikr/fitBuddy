@@ -360,8 +360,14 @@
                                 <color key="backgroundColor" red="0.58039215686274503" green="0.80000000000000004" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="3bw-ah-1Jr"/>
+                                    <constraint firstAttribute="bottom" secondItem="hed-pA-fqm" secondAttribute="bottom" constant="5" id="9HX-Dh-uhI"/>
+                                    <constraint firstItem="hed-pA-fqm" firstAttribute="top" secondItem="Duc-5P-nsg" secondAttribute="top" constant="2" id="BVC-Qp-FPm"/>
+                                    <constraint firstAttribute="bottom" secondItem="x1b-xq-T8L" secondAttribute="bottom" constant="4" id="RQz-1e-sxQ"/>
+                                    <constraint firstItem="JeE-a1-lrd" firstAttribute="top" secondItem="Duc-5P-nsg" secondAttribute="top" constant="4" id="XWj-EU-kmK"/>
                                     <constraint firstAttribute="height" constant="28" id="bHL-UY-3tX"/>
+                                    <constraint firstAttribute="bottom" secondItem="JeE-a1-lrd" secondAttribute="bottom" constant="3" id="pNp-J1-rf9"/>
                                     <constraint firstItem="x1b-xq-T8L" firstAttribute="leading" secondItem="hed-pA-fqm" secondAttribute="trailing" constant="15" id="rc5-cV-DC4"/>
+                                    <constraint firstItem="x1b-xq-T8L" firstAttribute="top" secondItem="Duc-5P-nsg" secondAttribute="top" constant="3" id="tyb-VO-DBD"/>
                                     <constraint firstItem="hed-pA-fqm" firstAttribute="leading" secondItem="JeE-a1-lrd" secondAttribute="trailing" constant="169" id="u0o-Xh-QTq"/>
                                 </constraints>
                             </view>
@@ -461,7 +467,7 @@
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="NQx-Qh-OGH" customClass="TrainingCollectionViewCell" customModule="fitnessBuddy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -849,7 +855,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzL-N2-2jx">
-                                <rect key="frame" x="17" y="187" width="43.5" height="27"/>
+                                <rect key="frame" x="17" y="187" width="161" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.10980392160000001" green="0.43137254899999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -875,8 +881,12 @@
                                     <action selector="repsDurToggleAction:" destination="H0L-Fq-0io" eventType="valueChanged" id="L8h-Xn-t19"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps/Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiO-QR-Nz8">
-                                <rect key="frame" x="199" y="186" width="140" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiO-QR-Nz8">
+                                <rect key="frame" x="199" y="186" width="160" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="iTI-bH-cvg"/>
+                                    <constraint firstAttribute="height" constant="27" id="w5a-sH-O3X"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.10980392160000001" green="0.43137254899999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -885,7 +895,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6dX-AI-L2y" firstAttribute="leading" secondItem="hcI-k9-TrR" secondAttribute="leadingMargin" constant="1" id="2LG-0o-cIm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GiO-QR-Nz8" secondAttribute="trailing" constant="20" id="5Q4-vD-cGY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GiO-QR-Nz8" secondAttribute="trailing" id="5Q4-vD-cGY"/>
                             <constraint firstAttribute="trailing" secondItem="83P-GT-Xd1" secondAttribute="trailing" id="8aK-LY-tjR"/>
                             <constraint firstItem="yhQ-pZ-Wkz" firstAttribute="top" secondItem="4ix-Ub-TTf" secondAttribute="bottom" constant="37" id="8wV-Y8-8Kq"/>
                             <constraint firstItem="GiO-QR-Nz8" firstAttribute="top" secondItem="QqP-oI-WtV" secondAttribute="bottom" constant="7" id="9a1-Uz-Ifi"/>
@@ -902,7 +912,7 @@
                             <constraint firstItem="4ix-Ub-TTf" firstAttribute="top" secondItem="GzL-N2-2jx" secondAttribute="bottom" constant="8" id="lJ6-TK-VTp"/>
                             <constraint firstItem="QqP-oI-WtV" firstAttribute="top" secondItem="6dX-AI-L2y" secondAttribute="bottom" constant="7.5" id="nsA-PC-6uJ"/>
                             <constraint firstItem="4ix-Ub-TTf" firstAttribute="leading" secondItem="hcI-k9-TrR" secondAttribute="leadingMargin" constant="1" id="o6t-mr-E3E"/>
-                            <constraint firstItem="GiO-QR-Nz8" firstAttribute="leading" secondItem="GzL-N2-2jx" secondAttribute="trailing" constant="138.5" id="p1r-9d-set"/>
+                            <constraint firstItem="GiO-QR-Nz8" firstAttribute="leading" secondItem="GzL-N2-2jx" secondAttribute="trailing" constant="21" id="p1r-9d-set"/>
                             <constraint firstItem="QqP-oI-WtV" firstAttribute="leading" secondItem="hcI-k9-TrR" secondAttribute="leadingMargin" constant="1" id="q8G-kY-3ZE"/>
                             <constraint firstItem="yx0-Q4-8DA" firstAttribute="leading" secondItem="4ix-Ub-TTf" secondAttribute="trailing" constant="21" id="tao-9J-8nX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yhQ-pZ-Wkz" secondAttribute="trailing" constant="105" id="tv6-ps-RjQ"/>

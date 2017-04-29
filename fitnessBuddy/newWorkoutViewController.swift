@@ -8,14 +8,24 @@
 
 import UIKit
 
-class newWorkoutViewController: UIViewController {
+class newWorkoutViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var workoutName: UITextField!
     @IBOutlet weak var sets: UITextField!
     @IBOutlet weak var repsDur: UITextField!
     @IBOutlet weak var repsDurToggle: UISegmentedControl!
-    
     @IBOutlet weak var repsOrDurationLabel: UILabel!
+    
+    enum CoreDataStrings:String {
+        case ID = "id"
+    }
+    
+    var isCoreDataStoringFinished = false {
+        didSet{
+            print("\n ***** Bool is set to \(isCoreDataStoringFinished) \n")
+          //  reloadTrainingViewTV(completion: nil)
+        }
+    }
     
     @IBAction func repsDurToggleAction(_ sender: UISegmentedControl) {
         selectedIndexRepsDur = sender.selectedSegmentIndex
@@ -46,13 +56,14 @@ class newWorkoutViewController: UIViewController {
         view.addGestureRecognizer(tap)
         repsOrDurationLabel.text = "Reps"
         createButton.layer.cornerRadius = 12
+    
         
+    
     }
 
     
 
     @IBAction func createWorkout(_ sender: Any) {
-        
         
         
         if (sets.text?.isEmpty)! {
@@ -69,32 +80,41 @@ class newWorkoutViewController: UIViewController {
         }
         
         else{
+            
+            
         DispatchQueue.global(qos: .background).async {
         let cdh = coreDataHandler()
-        var lstId = cdh.getLastId(forKey: "id")
-      
-            
-            
-        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: lstId)
-        
-        
-        print("You've created a workout \(workoutForSaving.name)that uses \(self.repsDurToggle) value")
-     
+        let lstId = cdh.getLastId(forKey: CoreDataStrings.ID.rawValue)
+        let workoutId = Int32(lstId+1)
     
-        //input validation za reps dur
-        
+            
+        let workoutForSaving = workoutModel(wrktDuration: 12, wrktReps: 2, wrktSets: 2, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: workoutId)
+            
         //store to core data - OVO STAVI NA BACKGROUND THREAD
-     
-        print("The last id is \(lstId)")
         
+            // VRATI SE NA MAIN THREAD DA MOŽEŠ RADITI AKTIVNOSTI PO VIEWU
+            var isSaved = cdh.saveWorkout(workout: workoutForSaving, completion: {
+                DispatchQueue.main.async {
+                    print("Everything is saved, do something now")
+                   
+                    self.reloadTrainingViewTV(completion:{
+                              self.tabBarController?.selectedIndex = 0
+                    }())
+                }
+                }())
     
-        cdh.saveWorkout(workout: workoutForSaving, completion: {
-            print("SAVED TO CORE DATA COMPLETION")
-            self.tabBarController?.selectedIndex = 0
-        })}
+           
+        }
+          
         
-        //OVO STAVI U COMPLETION - kad kreiraš workout moraš ga switchati na prvi tabview i po mogućnosti obilježi tu novu vježbu
-            self.tabBarController?.selectedIndex = 0}
+        }
+        
+    }
+    
+    func reloadTrainingViewTV(completion:()){
+        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
+        targetTabVC.workoutsTableView.delegate = self
+        targetTabVC.workoutsTableView.reloadData()
     }
     
     func dismissKeyboard(){

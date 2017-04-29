@@ -10,6 +10,7 @@ import UIKit
 
 class newTrainingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var workoutCell: addTrainingTableViewCell!
     @IBOutlet weak var workoutsTableView: UITableView!
     let selectionButton = CheckBox()
     
@@ -17,21 +18,25 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
     }
     
+    enum cells:String {
+        case workoutsTableViewCell = "cell"
+    }
+
 
     @IBOutlet weak var createBtn: UIButton!
     //fetch workouts in array
 //    var mockWorkoutsOfTraining = ["Benchpress","Incline bench press","Dumbell incline press","Dumbbell spread","Dips","Frenchpress","Biceps","Cable shoulder pull","Squats", "Legpress", "Lunges","Romanian deadlift", "Pull ups","Deadlift", "Biceps curl"]
-    var mockWorkoutsOfTraining = [Workout](){
+    
+    var availableWorkouts = [Workout](){
         didSet{
            // mockWorkoutsOfTraining.sort{$0 < $1}
+            for workout in availableWorkouts {
+                print("\(workout.id)  and  \(workout.name)")
+            }
             workoutsTableView.reloadData()
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        workoutsTableView.reloadData()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,25 +45,32 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         let cdh = coreDataHandler()
-        mockWorkoutsOfTraining = cdh.loadCoreData()
+        availableWorkouts = cdh.loadCoreData()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mockWorkoutsOfTraining.count
+        return availableWorkouts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = workoutsTableView.dequeueReusableCell(withIdentifier: "cell") as! addTrainingTableViewCell
-        cell.workoutTitle.text = mockWorkoutsOfTraining[indexPath.row].name!
-        cell.isSelected = true
+        let cell = workoutsTableView.dequeueReusableCell(withIdentifier: cells.workoutsTableViewCell.rawValue) as! addTrainingTableViewCell
+        cell.workoutTitle.text = availableWorkouts[indexPath.row].name!
+        let isSelected = cell.workoutSelectionIndicator
+        if (isSelected?.isChecked)!{
+            print ("The cell \(cell.workoutTitle.text!) is selected\n")
+        }else{
+            print ("The cell \(cell.workoutTitle.text!) is not selected\n")
+        }
         return cell
     }
     func dismissKeyboard(){
         view.endEditing(true)
     }
     @IBAction func createTraining(_ sender: Any) {
+        
+        
         
     }
   
