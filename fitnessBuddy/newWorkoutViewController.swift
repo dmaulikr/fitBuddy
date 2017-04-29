@@ -27,18 +27,15 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
     var isSuccessfullySaved = false{
         didSet{
             print("successfully saved")
-          
-                print("Everything is saved, do something now")
-                let a = coreDataHandler()
-                isSuccessfullyLoaded = a.loadCoreData()
-            
-            
+  
+                self.view.removeFromSuperview()
+                self.tabBarController?.selectedIndex = 0
         }
     }
     
     var isSuccessfullyLoaded = [Workout](){
         didSet{
-            reloadTrainingViewTV()
+            //reloadTrainingViewTV()
         }
     }
     
@@ -124,8 +121,12 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         
         else{
             
+        let cgFrame = CGRect(x: 12, y: 100, width: 100, height: 100)
+        let activityView = UIView(frame: cgFrame)
+        self.view.insertSubview(activityView, aboveSubview: self.view)
             
-        DispatchQueue.global(qos: .background).async {
+            
+        DispatchQueue.global(qos: .userInitiated).sync {
         let cdh = coreDataHandler()
         let lstId = cdh.getLastId(forKey: CoreDataStrings.ID.rawValue)
         let workoutId = Int32(lstId+1)
@@ -135,10 +136,8 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
             
             
         let workoutForSaving = workoutModel(wrktDuration: self.duration, wrktReps: self.reps, wrktSets: setsNum, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: workoutId)
+
             
-        //store to core data - OVO STAVI NA BACKGROUND THREAD
-        
-        // VRATI SE NA MAIN THREAD DA MOŽEŠ RADITI AKTIVNOSTI PO VIEWU
         self.isSuccessfullySaved = cdh.saveWorkout(workout: workoutForSaving, completion: {
                     print("\n I am done after workout is saved")
                 }())
@@ -149,11 +148,12 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
     }
     
     func reloadTrainingViewTV(){
-        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
-        targetTabVC.workoutsTableView.delegate = self
-//        let a = coreDataHandler()
-//        a.loadCoreData()
-        targetTabVC.workoutsTableView.reloadData()
+//        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
+//        targetTabVC.workoutsTableView.delegate = self
+////        let a = coreDataHandler()
+////        a.loadCoreData()
+//        targetTabVC.workoutsTableView.reloadData()
+        self.tabBarController?.selectedIndex = 0
     
     }
     

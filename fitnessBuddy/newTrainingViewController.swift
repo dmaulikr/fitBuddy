@@ -75,13 +75,8 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
             cell.repsOrDurLabel.text = "Dur"
         }
         cell.repsDurNum.text = String(workoutToShow.defReps)
-        
-        let isSelected = cell.workoutSelectionIndicator
-        if (isSelected?.isChecked)!{
-            print ("The cell \(cell.workoutTitle.text!) is selected\n")
-        }else{
-            print ("The cell \(cell.workoutTitle.text!) is not selected\n")
-        }
+
+     
         return cell
     }
     func dismissKeyboard(){
