@@ -8,7 +8,7 @@
 
 import UIKit
 
-class newWorkoutViewController: UIViewController, UITableViewDelegate {
+class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
 
     //outlets
     @IBOutlet weak var workoutName: UITextField!
@@ -55,10 +55,11 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         selectedIndexRepsDur = sender.selectedSegmentIndex
         print("Selected segment index is \(sender.selectedSegmentIndex)")
         if selectedIndexRepsDur == 1 {
+            if !(repsDur.text?.isEmpty)!{
             duration = Double(repsDur.text!)!
             print("Workout sets")
             setsNo = Int32(self.sets.text!)!
-            reps = 0
+                reps = 0}
         }else{
             reps = Int32(repsDur.text!)!
             setsNo = Int32(self.sets.text!)!
@@ -89,7 +90,10 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         }
     }
     
- 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        clearAllInputFields()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +101,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         view.addGestureRecognizer(tap)
         repsOrDurationLabel.text = "Reps"
         createButton.layer.cornerRadius = 12
-    
+        
         
     
     }
@@ -108,15 +112,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         
         
         if (sets.text?.isEmpty)! {
-            self.sets.layer.borderColor = UIColor.orange.cgColor
-            self.sets.layer.borderWidth = 2
-            self.sets.shake()
-            self.repsDur.layer.borderColor = UIColor.orange.cgColor
-            self.repsDur.layer.borderWidth = 2
-            self.repsDur.shake()
-            self.workoutName.layer.borderColor = UIColor.orange.cgColor
-            self.workoutName.layer.borderWidth = 2
-            self.workoutName.shake()
+            animateFields()
         }
         
         else{
@@ -147,15 +143,42 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate {
         
     }
     
-    func reloadTrainingViewTV(){
-//        let targetTabVC = self.tabBarController?.childViewControllers.first as! newTrainingViewController
-//        targetTabVC.workoutsTableView.delegate = self
-////        let a = coreDataHandler()
-////        a.loadCoreData()
-//        targetTabVC.workoutsTableView.reloadData()
-        self.tabBarController?.selectedIndex = 0
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("Editing a textfield")
+    }
+    
+    
+    func animateFields(){
+//        self.sets.layer.borderColor = UIColor.orange.cgColor
+//        self.sets.layer.borderWidth = 2
+        self.view.addBorderToTextField(textfield: self.sets, withColor: UIColor.orange.cgColor, withBorder: 2)
+        self.sets.shake()
+        self.view.addBorderToTextField(textfield: self.repsDur, withColor: UIColor.orange.cgColor, withBorder: 2)
+        self.repsDur.shake()
+        self.view.addBorderToTextField(textfield: self.workoutName, withColor: UIColor.orange.cgColor, withBorder: 2)
+        self.workoutName.shake()
+    }
+    
+    func clearAllInputFields(){
+        workoutName.text = ""
+        sets.text = ""
+        repsDur.text = ""
+        
+        self.view.removeBorderFromTextField(textfield: workoutName)
+        self.view.removeBorderFromTextField(textfield: sets)
+        self.view.removeBorderFromTextField(textfield: repsDur)
+    }
+    
+//    func reloadTrainingViewTV(){
+//
+//        self.tabBarController?.selectedIndex = 0
+//    
+//    }
     
     func dismissKeyboard(){
     view.endEditing(true)

@@ -39,10 +39,13 @@ class CheckBox: UIButton {
         self.addTarget(self, action: #selector(buttonClicked), for: UIControlEvents.touchUpInside)
         self.isChecked = false
     }
-    
-    func buttonClicked(sender: UIButton) {
+    //kad klikneš metoda vraća stanje u koje button ide
+    func buttonClicked(sender: UIButton) -> Bool {
         if sender == self {
             isChecked = !isChecked
+            let returnBoolean = Bool(isChecked.description)
+            return returnBoolean!
         }
+        return false
     }
 }

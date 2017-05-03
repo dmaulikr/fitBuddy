@@ -13,7 +13,7 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var workoutCell: addTrainingTableViewCell!
     @IBOutlet weak var workoutsTableView: UITableView!
    
-    let selectionButton = CheckBox()
+   // let selectionButton = CheckBox()
     
     @IBAction func closeWindow(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -25,14 +25,13 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
 
 
     @IBOutlet weak var createBtn: UIButton!
-    //fetch workouts in array
-//    var mockWorkoutsOfTraining = ["Benchpress","Incline bench press","Dumbell incline press","Dumbbell spread","Dips","Frenchpress","Biceps","Cable shoulder pull","Squats", "Legpress", "Lunges","Romanian deadlift", "Pull ups","Deadlift", "Biceps curl"]
+
     
     var availableWorkouts = [Workout](){
         didSet{
-           // mockWorkoutsOfTraining.sort{$0 < $1}
+            availableWorkouts.sort{$0.name! < $1.name!}
             for workout in availableWorkouts {
-                print("\(workout.id) and  \(workout.name)")
+                print("\(workout.id) and  \(String(describing: workout.name))")
             }
             workoutsTableView.reloadData()
         }
@@ -50,10 +49,12 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         workoutsTableView.reloadData()
         createBtn.layer.cornerRadius = 12
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+       // let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+      //  let tapTable: UITapGestureRecognizer = UITapGestureRecognizer(target: self.workoutsTableView, action: #selector(markRow))
+        //view.addGestureRecognizer(tap)
         let cdh = coreDataHandler()
         availableWorkouts = cdh.loadCoreData()
+        workoutsTableView.allowsMultipleSelection = true
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,22 +71,41 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         cell.workoutTitle.text = workoutToShow.name!
         cell.setsNum.text = String(workoutToShow.defSets)
         if !workoutToShow.repSet{
-            cell.repsOrDurLabel.text = "Reps"
+            //cell.repsOrDurLabel.text = "Reps"
         }else{
-            cell.repsOrDurLabel.text = "Dur"
+           // cell.repsOrDurLabel.text = "Dur"
         }
         cell.repsDurNum.text = String(workoutToShow.defReps)
+        
+       //is selected
+       // cell.workoutSelectionIndicator.isChecked = true
+        
+        let a = cell.workoutSelectionIndicator.isChecked
+        //print("\n ** cell \(cell.workoutTitle.text!) is \(a)")
+        
 
      
         return cell
     }
+
+    
     func dismissKeyboard(){
         view.endEditing(true)
     }
     @IBAction func createTraining(_ sender: Any) {
         
+    
         
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = workoutsTableView.cellForRow(at: indexPath) as? addTrainingTableViewCell{
+            cell.workoutSelectionIndicator.isChecked = !cell.workoutSelectionIndicator.isChecked
+            print("Selected")
+        }else{
+            print("Unselected")
+            
+        }
     }
   
    

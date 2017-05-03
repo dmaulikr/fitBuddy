@@ -33,6 +33,8 @@ extension UIViewController {
 
 }
 
+//animations
+
 extension UIView{
     func shake() {
         let animation = CABasicAnimation(keyPath: "position")
@@ -51,6 +53,16 @@ extension UIView{
         animation.fromValue = CGPoint(x: self.center.x - 15, y:self.center.y)
         animation.toValue = CGPoint(x: self.center.x + 15, y:self.center.y)
         self.layer.add(animation, forKey: "position")
+    }
+    
+    func addBorderToTextField(textfield:UITextField, withColor color: CGColor, withBorder border:CGFloat ){
+        textfield.layer.borderColor = color
+        textfield.layer.borderWidth = border
+    }
+    
+    func removeBorderFromTextField(textfield:UITextField){
+        textfield.layer.borderColor = nil
+        textfield.layer.borderWidth = 0
     }
 
 

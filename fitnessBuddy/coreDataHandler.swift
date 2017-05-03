@@ -11,8 +11,8 @@ import CoreData
 
 
 class coreDataHandler: NSObject {
-    
-    
+
+
    // var lastID:Int32 = 0
 
     func saveWorkout (workout: workoutModel, completion:()) -> Bool{
