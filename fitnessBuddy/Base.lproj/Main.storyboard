@@ -647,7 +647,7 @@
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="s5N-Cz-IKZ">
-                                                    <rect key="frame" x="17" y="14" width="315" height="38"/>
+                                                    <rect key="frame" x="17" y="14" width="243" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xta-jI-JZP">
@@ -672,13 +672,6 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IvP-ML-lI4" customClass="CheckBox" customModule="fitnessBuddy" customModuleProvider="target">
-                                                            <rect key="frame" x="273" y="0.0" width="42" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="38" id="6Sa-zj-mc2"/>
-                                                                <constraint firstAttribute="width" constant="42" id="QE6-k4-PYw"/>
-                                                            </constraints>
-                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -691,7 +684,6 @@
                                         <connections>
                                             <outlet property="repsDurNum" destination="QcG-dB-HhQ" id="AC8-DT-vDk"/>
                                             <outlet property="setsNum" destination="4TX-ak-Hje" id="Dsy-2Y-13E"/>
-                                            <outlet property="workoutSelectionIndicator" destination="IvP-ML-lI4" id="mIi-qq-MDf"/>
                                             <outlet property="workoutTitle" destination="Xta-jI-JZP" id="sxe-fE-Id8"/>
                                         </connections>
                                     </tableViewCell>

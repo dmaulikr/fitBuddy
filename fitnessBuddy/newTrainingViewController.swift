@@ -55,6 +55,7 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         let cdh = coreDataHandler()
         availableWorkouts = cdh.loadCoreData()
         workoutsTableView.allowsMultipleSelection = true
+    
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,15 +77,14 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
            // cell.repsOrDurLabel.text = "Dur"
         }
         cell.repsDurNum.text = String(workoutToShow.defReps)
+ 
         
-       //is selected
-       // cell.workoutSelectionIndicator.isChecked = true
+        let selectedIndexPaths = tableView.indexPathsForSelectedRows
+        let rowIsSelected = selectedIndexPaths != nil && selectedIndexPaths!.contains(indexPath)
+        cell.accessoryType = rowIsSelected ? .checkmark : .none
         
-        let a = cell.workoutSelectionIndicator.isChecked
-        //print("\n ** cell \(cell.workoutTitle.text!) is \(a)")
+        cell.selectionStyle = .none
         
-
-     
         return cell
     }
 
@@ -94,19 +94,34 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     }
     @IBAction func createTraining(_ sender: Any) {
         
+        let selectedRows = workoutsTableView.indexPathsForSelectedRows
+        //let selectedData = selectedRows?.map { dataArray[$0.row].ID }
     
         
+        for row in selectedRows! {
+            print("Row \(row) \n")
+        }
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = workoutsTableView.cellForRow(at: indexPath) as? addTrainingTableViewCell{
-            cell.workoutSelectionIndicator.isChecked = !cell.workoutSelectionIndicator.isChecked
+          //  cell.workoutSelectionIndicator.isChecked = !cell.workoutSelectionIndicator.isChecked
+            cell.accessoryType = .checkmark
             print("Selected")
         }else{
             print("Unselected")
             
         }
     }
-  
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = workoutsTableView.cellForRow(at: indexPath) as? addTrainingTableViewCell{
+            //cell.workoutSelectionIndicator.isChecked = !cell.workoutSelectionIndicator.isChecked
+            cell.accessoryType = .none
+            print("Selected")
+        }else{
+            print("Unselected")
+        }
+    }
    
 }
