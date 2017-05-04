@@ -99,6 +99,7 @@ class coreDataHandler: NSObject {
     
     // training
     
+    //load distinct trainings for collectionview list
     func loadTrainingData()->[Training]{
         
         var trainings = [Training]()
@@ -109,6 +110,7 @@ class coreDataHandler: NSObject {
         
         do{
             let fetchRequest : NSFetchRequest<Training> = Training.fetchRequest()
+            fetchRequest.returnsDistinctResults = true
             
             let result = try managedContext?.fetch(fetchRequest)
             print("********** \n Loading trainings \n **********")
@@ -116,7 +118,7 @@ class coreDataHandler: NSObject {
                 trainings.append(training)
             }
             //  self.lastID = (restaurants.last?.id)!
-            
+   
             return trainings
             
         }
@@ -127,15 +129,18 @@ class coreDataHandler: NSObject {
         return trainings
     }
     
-    func saveTraining (training: workoutModel, completion:())->Bool{
+    func saveTraining (training: trainingModel) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return false
+            return
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
-        let wrkt = NSManagedObject(entity: entity!, insertInto: managedContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Training", in: managedContext)
+        let trnng = NSManagedObject(entity: entity!, insertInto: managedContext)
+        
+        trnng.setValue(training.name, forKey: "name")
+        trnng.setValue(training.trainingId, forKey: "id")
 //        wrkt.setValue(workout.wrktId, forKey: "id")
 //        wrkt.setValue(workout.name, forKey: "name")
 //        wrkt.setValue(workout.repSet, forKey: "repSet")
@@ -148,11 +153,11 @@ class coreDataHandler: NSObject {
         
         do{
             try managedContext.save()
-            return true
+            print("a")
             
         }catch let error as NSError{
             print("Can't save due to \(error)")
-            return false
+         
     
         }
     }

@@ -49,9 +49,9 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         workoutsTableView.reloadData()
         createBtn.layer.cornerRadius = 12
-       // let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-      //  let tapTable: UITapGestureRecognizer = UITapGestureRecognizer(target: self.workoutsTableView, action: #selector(markRow))
-        //view.addGestureRecognizer(tap)
+        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        //let tapTable: UITapGestureRecognizer = UITapGestureRecognizer(target: self.workoutsTableView, action: #selector(markRow))
+       // view.addGestureRecognizer(tap)
         let cdh = coreDataHandler()
         availableWorkouts = cdh.loadCoreData()
         workoutsTableView.allowsMultipleSelection = true
@@ -88,25 +88,15 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
 
-    
+
     func dismissKeyboard(){
         view.endEditing(true)
     }
-    @IBAction func createTraining(_ sender: Any) {
-        
-        let selectedRows = workoutsTableView.indexPathsForSelectedRows
-        //let selectedData = selectedRows?.map { dataArray[$0.row].ID }
     
-        
-        for row in selectedRows! {
-            print("Row \(row) \n")
-        }
-    
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = workoutsTableView.cellForRow(at: indexPath) as? addTrainingTableViewCell{
-          //  cell.workoutSelectionIndicator.isChecked = !cell.workoutSelectionIndicator.isChecked
+            //  cell.workoutSelectionIndicator.isChecked = !cell.workoutSelectionIndicator.isChecked
             cell.accessoryType = .checkmark
             print("Selected")
         }else{
@@ -123,5 +113,54 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
             print("Unselected")
         }
     }
+    
+    
+    
+    @IBAction func createTraining(_ sender: Any) {
+        
+        guard let selectedRowsData = workoutsTableView.indexPathsForSelectedRows else {
+            print("No rows selected")
+            //alert user
+            return
+        }
+        //let selectedData = selectedRows?.map { dataArray[$0.row].ID }
+        var selectedRows = [Int]()
+        var selectedWorkoutIDs = [Int]()
+        
+        
+        for row in selectedRowsData {
+            print("Row \(row[1]) \n")
+                selectedRows.append(row[1])
+         
+        }
+        
+        
+        for selectedWorkout in selectedRows{
+            selectedWorkoutIDs.append(Int(availableWorkouts[selectedWorkout].id))
+            let workoutID = Int(availableWorkouts[selectedWorkout].id)
+            let training = trainingModel(trainingDuration: 0, durSet: false, name: "testTraining", reps: 10, sets: 10, trainingId: 1, workoutID: Int32(workoutID))
+            
+            let cdh = coreDataHandler()
+            cdh.saveTraining(training: training)
+            
+            
+            print("Done")
+        }
+        
+        
+        //create training object and save it
+    
+        
+        
+        
+        //save to core data and close the training creator
+    
+    }
+    
+    @IBAction func zipRecruiter(_ sender: Any) {
+        
+        self.dismissKeyboard()
+    }
+
    
 }

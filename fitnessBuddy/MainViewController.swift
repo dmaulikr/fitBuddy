@@ -34,6 +34,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     
     var mockTrainings = ["Push","Pull","Legs","Cardio","Accessories","HIIT","Backday"]
+    var listOfTrainings = [Training]()
     
     // end mock trainings 
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +42,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
          workoutsCollectionView.frame.size.width = self.view.bounds.width
-         
+         let cdh = coreDataHandler()
+        listOfTrainings = cdh.loadTrainingData()
+     
+        
         
     }
     
@@ -92,6 +96,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.title = title
             self.intensity = intensity
         }
+    }
+    @IBAction func test(_ sender: Any) {
+        print("Called")
+        
+        for tr in listOfTrainings{
+           
+            
+            print("tr \(tr.name!) with \(tr.id) \n")
+            print("Setted \(Set(listOfTrainings))")
+        }
+        
     }
 
 }
