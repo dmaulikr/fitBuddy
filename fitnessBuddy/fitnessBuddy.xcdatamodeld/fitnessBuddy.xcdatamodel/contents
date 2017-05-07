@@ -10,6 +10,10 @@
         <attribute name="trainingId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="wrktId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="TrainingNames" representedClassName="TrainingNames" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Workout" representedClassName="Workout" syncable="YES" codeGenerationType="class">
         <attribute name="defDur" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="defReps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -21,5 +25,6 @@
     <elements>
         <element name="Training" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="Workout" positionX="-54" positionY="18" width="128" height="135"/>
+        <element name="TrainingNames" positionX="-54" positionY="45" width="128" height="75"/>
     </elements>
 </model>

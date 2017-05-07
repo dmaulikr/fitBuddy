@@ -12,6 +12,7 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var workoutCell: addTrainingTableViewCell!
     @IBOutlet weak var workoutsTableView: UITableView!
+    @IBOutlet weak var trainingNameLbl: UITextField!
    
    // let selectionButton = CheckBox()
     
@@ -114,6 +115,9 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func getSelectedRowsAndStoreIntoArray(){
+    
+    }
     
     
     @IBAction func createTraining(_ sender: Any) {
@@ -123,22 +127,23 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
             //alert user
             return
         }
-        //let selectedData = selectedRows?.map { dataArray[$0.row].ID }
+      
         var selectedRows = [Int]()
         var selectedWorkoutIDs = [Int]()
-        
         
         for row in selectedRowsData {
             print("Row \(row[1]) \n")
                 selectedRows.append(row[1])
-         
         }
         
         
+        //we need to go deeper
         for selectedWorkout in selectedRows{
             selectedWorkoutIDs.append(Int(availableWorkouts[selectedWorkout].id))
+            
             let workoutID = Int(availableWorkouts[selectedWorkout].id)
-            let training = trainingModel(trainingDuration: 0, durSet: false, name: "testTraining", reps: 10, sets: 10, trainingId: 1, workoutID: Int32(workoutID))
+            
+            let training = trainingModel(trainingDuration: 0, durSet: false, name: trainingNameLbl.text! , reps: 10, sets: 10, trainingId: 1, workoutID: Int32(workoutID))
             
             let cdh = coreDataHandler()
             cdh.saveTraining(training: training)
@@ -147,12 +152,7 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
             print("Done")
         }
         
-        
-        //create training object and save it
-    
-        
-        
-        
+  
         //save to core data and close the training creator
     
     }

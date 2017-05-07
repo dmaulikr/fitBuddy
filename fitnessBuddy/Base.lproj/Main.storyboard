@@ -798,6 +798,7 @@
                     <tabBarItem key="tabBarItem" title="New training" image="trainingBar" selectedImage="trainingBar" id="EYx-Nz-o43"/>
                     <connections>
                         <outlet property="createBtn" destination="6zY-cy-pgc" id="quG-Zu-hbn"/>
+                        <outlet property="trainingNameLbl" destination="ZXf-rb-7NL" id="uRS-Xz-6c0"/>
                         <outlet property="workoutsTableView" destination="WCP-Jz-fQq" id="F2O-se-WKQ"/>
                     </connections>
                 </viewController>

@@ -9,6 +9,11 @@
 import UIKit
 import CoreData
 
+// TODO - enums for generic fetch from core data
+enum entities:String {
+    case training = "Training"
+    case workout = "Workout"
+}
 
 class coreDataHandler: NSObject {
 
@@ -70,7 +75,6 @@ class coreDataHandler: NSObject {
         catch {
             fatalError("Error while trying to get core data")
         }
-        print("Restaurants = \(workouts[0])")
         return workouts
     }
     
@@ -109,16 +113,39 @@ class coreDataHandler: NSObject {
         let managedContext = appDelegate?.persistentContainer.viewContext
         
         do{
-            let fetchRequest : NSFetchRequest<Training> = Training.fetchRequest()
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Training")
+            fetchRequest.resultType = .dictionaryResultType
+            fetchRequest.propertiesToFetch = ["name"]
             fetchRequest.returnsDistinctResults = true
+            //fetchRequest.propertiesToFetch = ["id"]
+            //fetchRequest.fetchRequest()
+            //fetchRequest.returnsDistinctResults = true
+           // fetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
             
-            let result = try managedContext?.fetch(fetchRequest)
+            if let result = try managedContext?.fetch(fetchRequest) as? [Dictionary<String, String>] {
+                
+            var dictArray = [Dictionary<String, String>]()
+            
             print("********** \n Loading trainings \n **********")
-            for training in result! {
-                trainings.append(training)
+//            print("///// \n \(result) \n ///////")
+                for r in result{
+                      print(" \n ----- \(String(describing: r["name"]!))")
+                    //dictArray.append(r as! [String : String])
+//                    print("R \n\(r)")
+                }
+                
+//                for ii in dictArray {
+//                    print(" \n ----- \(String(describing: ii["name"]!))")
+//                }
+//            for training in result {
+//                trainings.append(training as! Training)
+//                
+//                }
             }
             //  self.lastID = (restaurants.last?.id)!
-   
+            
+           // print("Trainings \(trainings[0].id as! Training)")
+            
             return trainings
             
         }
@@ -141,12 +168,6 @@ class coreDataHandler: NSObject {
         
         trnng.setValue(training.name, forKey: "name")
         trnng.setValue(training.trainingId, forKey: "id")
-//        wrkt.setValue(workout.wrktId, forKey: "id")
-//        wrkt.setValue(workout.name, forKey: "name")
-//        wrkt.setValue(workout.repSet, forKey: "repSet")
-//        wrkt.setValue(workout.defDur, forKey: "defDur")
-//        wrkt.setValue(workout.defSets, forKey: "defSets")
-//        wrkt.setValue(workout.defReps, forKey: "defReps")
         
         print("\n ***** Core data saving ***** \n")
         
@@ -159,6 +180,33 @@ class coreDataHandler: NSObject {
             print("Can't save due to \(error)")
          
     
+        }
+    }
+    
+    func saveTrainingName(trainingName:String) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Training", in: managedContext)
+        let trnNm = NSManagedObject(entity: entity!, insertInto: managedContext)
+//        
+//        trnNm.setValue(training.name, forKey: "name")
+//        trnng.setValue(training.trainingId, forKey: "id")
+        
+        print("\n ***** Core data saving ***** \n")
+        
+        
+        do{
+            try managedContext.save()
+            print("a")
+            
+        }catch let error as NSError{
+            print("Can't save due to \(error)")
+            
+            
         }
     }
 

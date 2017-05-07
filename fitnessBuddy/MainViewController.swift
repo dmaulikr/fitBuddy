@@ -53,7 +53,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mockTrainings.count
+        return listOfTrainings.count
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -70,7 +70,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = workoutsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TrainingCollectionViewCell
-        cell.cellTrainingTitle.text = mockTrainings[indexPath.row]
+        cell.cellTrainingTitle.text = listOfTrainings[indexPath.row].name
         cell.contentView.layer.borderColor = UIColor(red:0.65, green:0.44, blue:0.94, alpha:1.0).cgColor
        // cell.contentView.layer.borderWidth = 1
         
