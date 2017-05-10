@@ -9,42 +9,46 @@
 import UIKit
 
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     @IBOutlet weak var workoutsCollectionView: UICollectionView!
     @IBOutlet weak var headerView: UIView!
     
     let trainings = [Training]()
     
-    //create mock trainings
-    
-     var training1 = mockTraining(nameOfExcercise: "Push", intensity: 1)
-     var training2 = mockTraining(nameOfExcercise: "Pull", intensity: 4)
-     var training3 = mockTraining(nameOfExcercise: "Cardio", intensity: 2)
-     var training4 = mockTraining(nameOfExcercise: "HIIT", intensity: 3)
-     var training5 = mockTraining(nameOfExcercise: "Back day", intensity: 5)
-    
-    var colorCoordination = [UIColor]()
-    
-    func appendColors(){
-        colorCoordination.append(UIColor.black)
-//        colorCoordination.append()
-//        colorCoordination.append()
-//        colorCoordination.append()
-//        colorCoordination.append()
-    }
-
-    
-    var mockTrainings = ["Push","Pull","Legs","Cardio","Accessories","HIIT","Backday"]
     var listOfTrainings = [Training]()
+    var listOfTrainingNames = [String](){
+        didSet{
+            workoutsCollectionView.reloadData()
+        }
+    }
     
     // end mock trainings 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let layout = workoutsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let itemWidth = view.bounds.width
+            let itemHeight = CGFloat(115)
+            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+            layout.invalidateLayout()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        workoutsCollectionView.reloadData()
+        let cdh = coreDataHandler()
+        // listOfTrainings = cdh.loadTrainingData()
+        listOfTrainingNames = cdh.loadTrainingData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          workoutsCollectionView.frame.size.width = self.view.bounds.width
-         let cdh = coreDataHandler()
-        listOfTrainings = cdh.loadTrainingData()
-     
+        
+
         
         
     }
@@ -53,24 +57,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listOfTrainings.count
+        return listOfTrainingNames.count
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.bounds.maxX/3, height: self.view.bounds.maxY/6);
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.width
-        let itemHeight = collectionView.bounds.height
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = workoutsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TrainingCollectionViewCell
-        cell.cellTrainingTitle.text = listOfTrainings[indexPath.row].name
+        cell.cellTrainingTitle.text = listOfTrainingNames[indexPath.row]
         cell.contentView.layer.borderColor = UIColor(red:0.65, green:0.44, blue:0.94, alpha:1.0).cgColor
        // cell.contentView.layer.borderWidth = 1
         
@@ -79,7 +73,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOpacity = -1
         cell.layer.shadowOffset = CGSize.zero
-        cell.layer.shadowRadius = 10
+        cell.layer.shadowRadius = 100
         
         //cornerRadius
         cell.layer.cornerRadius = 2

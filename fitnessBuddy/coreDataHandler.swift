@@ -101,15 +101,13 @@ class coreDataHandler: NSObject {
     }
     
     
-    // training
+    // TRAINING
     
     //load distinct trainings for collectionview list
-    func loadTrainingData()->[Training]{
+    func loadTrainingData()->[String]{
         
-        var trainings = [Training]()
-        
+        var trainings = [String]()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        
         let managedContext = appDelegate?.persistentContainer.viewContext
         
         do{
@@ -117,49 +115,28 @@ class coreDataHandler: NSObject {
             fetchRequest.resultType = .dictionaryResultType
             fetchRequest.propertiesToFetch = ["name"]
             fetchRequest.returnsDistinctResults = true
-            //fetchRequest.propertiesToFetch = ["id"]
-            //fetchRequest.fetchRequest()
-            //fetchRequest.returnsDistinctResults = true
-           // fetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
+
             
             if let result = try managedContext?.fetch(fetchRequest) as? [Dictionary<String, String>] {
-                
-            var dictArray = [Dictionary<String, String>]()
-            
-            print("********** \n Loading trainings \n **********")
-//            print("///// \n \(result) \n ///////")
                 for r in result{
-                      print(" \n ----- \(String(describing: r["name"]!))")
-                    //dictArray.append(r as! [String : String])
-//                    print("R \n\(r)")
+                    //  print(" \n ----- \(String(describing: r["id"]!))  ---- \(String(describing: r["name"]!))")
+                    let trainingName = String(describing: r["name"]!)
+                    trainings.append(trainingName)
                 }
-                
-//                for ii in dictArray {
-//                    print(" \n ----- \(String(describing: ii["name"]!))")
-//                }
-//            for training in result {
-//                trainings.append(training as! Training)
-//                
-//                }
             }
-            //  self.lastID = (restaurants.last?.id)!
-            
-           // print("Trainings \(trainings[0].id as! Training)")
-            
             return trainings
-            
-        }
+            }
         catch {
             fatalError("Error while trying to get core data")
         }
-     
         return trainings
     }
     
-    func saveTraining (training: trainingModel) {
+    
+    func saveTraining (training: trainingModel)->Bool {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
+            return false
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -174,10 +151,10 @@ class coreDataHandler: NSObject {
         
         do{
             try managedContext.save()
-            print("a")
+            return true
             
         }catch let error as NSError{
-            print("Can't save due to \(error)")
+            return false
          
     
         }

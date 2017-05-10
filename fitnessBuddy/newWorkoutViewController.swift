@@ -27,8 +27,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFie
     var isSuccessfullySaved = false{
         didSet{
             print("successfully saved")
-  
-                self.view.removeFromSuperview()
+                //self.view.removeFromSuperview()
                 self.tabBarController?.selectedIndex = 0
         }
     }
@@ -57,7 +56,6 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFie
         if selectedIndexRepsDur == 1 {
             if !(repsDur.text?.isEmpty)!{
             duration = Double(repsDur.text!)!
-            print("Workout sets")
             setsNo = Int32(self.sets.text!)!
                 reps = 0}
         }else{
@@ -128,9 +126,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFie
         let workoutId = Int32(lstId+1)
         let setsNum = Int32(self.sets.text!)!
             
-        print("Workout for saving are self.duration \(self.duration) \n self.reps \(self.reps) \n zeroIsRepsOneIsSets \(self.repsOrDur) \n wrktSets \(self.setsNo) \n self.sets = \(self.sets.text!)")
-            
-            
+
         let workoutForSaving = workoutModel(wrktDuration: self.duration, wrktReps: self.reps, wrktSets: setsNum, wrktName: self.workoutName.text!, zeroIsRepsOneIsSets: self.repsOrDur, wrktId: workoutId)
 
             
@@ -154,8 +150,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFie
     
     
     func animateFields(){
-//        self.sets.layer.borderColor = UIColor.orange.cgColor
-//        self.sets.layer.borderWidth = 2
+
         self.view.addBorderToTextField(textfield: self.sets, withColor: UIColor.orange.cgColor, withBorder: 2)
         self.sets.shake()
         self.view.addBorderToTextField(textfield: self.repsDur, withColor: UIColor.orange.cgColor, withBorder: 2)
@@ -173,12 +168,7 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFie
         self.view.removeBorderFromTextField(textfield: sets)
         self.view.removeBorderFromTextField(textfield: repsDur)
     }
-    
-//    func reloadTrainingViewTV(){
-//
-//        self.tabBarController?.selectedIndex = 0
-//    
-//    }
+
     
     func dismissKeyboard(){
     view.endEditing(true)

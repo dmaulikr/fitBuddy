@@ -20,6 +20,14 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
     }
     
+    var isSuccessfullySaved = false{
+        didSet{
+            print("successfully saved")
+            //self.view.removeFromSuperview()
+            self.closeWindow(self)
+        }
+    }
+    
     enum cells:String {
         case workoutsTableViewCell = "cell"
     }
@@ -145,17 +153,17 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
             
             let training = trainingModel(trainingDuration: 0, durSet: false, name: trainingNameLbl.text! , reps: 10, sets: 10, trainingId: 1, workoutID: Int32(workoutID))
             
+            
+            
             let cdh = coreDataHandler()
-            cdh.saveTraining(training: training)
+            //cdh.saveTraining(training: training)
             
-            
-            print("Done")
+            self.isSuccessfullySaved = cdh.saveTraining(training: training)
         }
-        
-  
-        //save to core data and close the training creator
-    
     }
+    
+    
+    
     
     @IBAction func zipRecruiter(_ sender: Any) {
         

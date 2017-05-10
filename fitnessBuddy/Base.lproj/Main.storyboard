@@ -473,17 +473,17 @@
                                     <constraint firstAttribute="width" constant="375" id="HAc-HY-vwy"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ice-5h-rae">
-                                    <size key="itemSize" width="366" height="113"/>
+                                    <size key="itemSize" width="355" height="113"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="NQx-Qh-OGH" customClass="TrainingCollectionViewCell" customModule="fitnessBuddy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4 days ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBp-MO-FB2">
@@ -500,8 +500,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyS-rE-Cvw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="7" height="113"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XyS-rE-Cvw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="7" height="50"/>
                                                     <color key="backgroundColor" red="0.50588235294117645" green="0.90980392156862744" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="113" id="4qT-1W-Wua"/>
@@ -531,13 +531,8 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.060600385273972601" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="XyS-rE-Cvw" secondAttribute="bottom" id="Aai-Ue-lak"/>
-                                            <constraint firstItem="XyS-rE-Cvw" firstAttribute="leading" secondItem="NQx-Qh-OGH" secondAttribute="leading" id="PwC-cR-GlT"/>
-                                            <constraint firstItem="XyS-rE-Cvw" firstAttribute="top" secondItem="NQx-Qh-OGH" secondAttribute="top" id="elF-Xn-p2e"/>
-                                        </constraints>
-                                        <size key="customSize" width="375" height="113"/>
+                                        <color key="backgroundColor" red="0.39005533854166669" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.060600385273972601" colorSpace="calibratedRGB"/>
+                                        <size key="customSize" width="375" height="115"/>
                                         <connections>
                                             <outlet property="cellTrainingTitle" destination="mF6-m6-TzN" id="6Uz-et-DRM"/>
                                             <outlet property="intensityView" destination="XyS-rE-Cvw" id="52c-9E-z68"/>
@@ -569,7 +564,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rPa-Tn-1LH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-777" y="770"/>
+            <point key="canvasLocation" x="-778.39999999999998" y="769.56521739130437"/>
         </scene>
         <!--New training-->
         <scene sceneID="nwU-6W-DHe">
