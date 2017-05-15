@@ -93,13 +93,13 @@ class newWorkoutViewController: UIViewController, UITableViewDelegate, UITextFie
         clearAllInputFields()
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         repsOrDurationLabel.text = "Reps"
         createButton.layer.cornerRadius = 12
-        
         
     
     }

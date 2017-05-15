@@ -262,7 +262,7 @@
                                     <constraint firstAttribute="height" constant="323" id="9Hx-Y7-A9x"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="63" id="fJ0-V9-lWV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="63" id="fJ0-V9-lWV" customClass="SelectedTrainingTableViewCell" customModule="fitnessBuddy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fJ0-V9-lWV" id="UqX-12-Uh7">
@@ -324,6 +324,9 @@
                                                 <constraint firstItem="uzm-aX-0wH" firstAttribute="top" secondItem="UqX-12-Uh7" secondAttribute="top" constant="6" id="xjL-iP-ZHL"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="trainingCellLabel" destination="4lU-m7-c3I" id="ES1-zc-cBp"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

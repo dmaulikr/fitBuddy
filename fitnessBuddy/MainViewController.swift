@@ -27,7 +27,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         if let layout = workoutsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let itemWidth = view.bounds.width
             let itemHeight = CGFloat(115)
@@ -94,8 +93,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBAction func test(_ sender: Any) {
         print("Called")
         
+        let cdh = coreDataHandler()
+        var a:Int32 = cdh.getLastIdTraining(forKey: "id")
+        
+        print("\n \(a)")
+        
         for tr in listOfTrainings{
-           
+            
             
             print("tr \(tr.name!) with \(tr.id) \n")
             print("Setted \(Set(listOfTrainings))")

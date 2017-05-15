@@ -14,7 +14,6 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var workoutsTableView: UITableView!
     @IBOutlet weak var trainingNameLbl: UITextField!
    
-   // let selectionButton = CheckBox()
     
     @IBAction func closeWindow(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -22,8 +21,6 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
     
     var isSuccessfullySaved = false{
         didSet{
-            print("successfully saved")
-            //self.view.removeFromSuperview()
             self.closeWindow(self)
         }
     }
@@ -144,6 +141,9 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
                 selectedRows.append(row[1])
         }
         
+        let cdh = coreDataHandler()
+        let lastTrainingId = cdh.getLastIdTraining(forKey: "id")
+        let thisTrainingId:Int32 = lastTrainingId + 1
         
         //we need to go deeper
         for selectedWorkout in selectedRows{
@@ -151,12 +151,9 @@ class newTrainingViewController: UIViewController, UITableViewDelegate, UITableV
             
             let workoutID = Int(availableWorkouts[selectedWorkout].id)
             
-            let training = trainingModel(trainingDuration: 0, durSet: false, name: trainingNameLbl.text! , reps: 10, sets: 10, trainingId: 1, workoutID: Int32(workoutID))
-            
-            
-            
-            let cdh = coreDataHandler()
-            //cdh.saveTraining(training: training)
+            let training = trainingModel(trainingDuration: 0, durSet: false, name: trainingNameLbl.text! ,
+                                         reps: 10, sets: 10, trainingId: thisTrainingId,
+                                         workoutID: Int32(workoutID))
             
             self.isSuccessfullySaved = cdh.saveTraining(training: training)
         }

@@ -24,6 +24,7 @@
 		A458262B1EA166B900B26A5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A458262A1EA166B900B26A5C /* Assets.xcassets */; };
 		A458262E1EA166B900B26A5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A458262C1EA166B900B26A5C /* LaunchScreen.storyboard */; };
 		A45826361EA16DCB00B26A5C /* CirclePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45826351EA16DCB00B26A5C /* CirclePath.swift */; };
+		A47C06CF1ECA4AAC00FFB344 /* SelectedTrainingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47C06CE1ECA4AAC00FFB344 /* SelectedTrainingTableViewCell.swift */; };
 		A4EE3B801EA38B2800E99DEF /* newTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3B7F1EA38B2800E99DEF /* newTrainingViewController.swift */; };
 		A4EE3B821EA3937A00E99DEF /* newWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3B811EA3937A00E99DEF /* newWorkoutViewController.swift */; };
 		A4EE3B841EA3D08700E99DEF /* ScrollingTabBarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3B831EA3D08700E99DEF /* ScrollingTabBarUtils.swift */; };
@@ -51,6 +52,7 @@
 		A458262D1EA166B900B26A5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A458262F1EA166B900B26A5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A45826351EA16DCB00B26A5C /* CirclePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclePath.swift; sourceTree = "<group>"; };
+		A47C06CE1ECA4AAC00FFB344 /* SelectedTrainingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTrainingTableViewCell.swift; sourceTree = "<group>"; };
 		A4EE3B7F1EA38B2800E99DEF /* newTrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTrainingViewController.swift; sourceTree = "<group>"; };
 		A4EE3B811EA3937A00E99DEF /* newWorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newWorkoutViewController.swift; sourceTree = "<group>"; };
 		A4EE3B831EA3D08700E99DEF /* ScrollingTabBarUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingTabBarUtils.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		A4EE3B881EA3E45D00E99DEF /* Selected training */ = {
 			isa = PBXGroup;
 			children = (
+				A47C06CE1ECA4AAC00FFB344 /* SelectedTrainingTableViewCell.swift */,
 				A4506CD81EA28650000CA936 /* selectedTrainingViewController.swift */,
 			);
 			name = "Selected training";
@@ -254,6 +257,7 @@
 				A45826211EA166B900B26A5C /* AppDelegate.swift in Sources */,
 				A4506CD21EA24256000CA936 /* MainViewController.swift in Sources */,
 				A418F8C21EAD1D7F0030B4BD /* trainingModel.swift in Sources */,
+				A47C06CF1ECA4AAC00FFB344 /* SelectedTrainingTableViewCell.swift in Sources */,
 				A4EE3B8A1EA3E79C00E99DEF /* addTrainingTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

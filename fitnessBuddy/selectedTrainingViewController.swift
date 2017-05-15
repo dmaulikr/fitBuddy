@@ -14,9 +14,24 @@ class selectedTrainingViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var startWorkoutBtn: UIButton!
     @IBOutlet weak var leftBtnConstr: NSLayoutConstraint!
     @IBOutlet weak var btnWidthConstr: NSLayoutConstraint!
+    
+    
+    var availableTrainings = [Workout](){
+        didSet{
+            for w in availableTrainings {
+                print("\n training \(w.name!)")
+            }
+        }
+    }
 
     @IBAction func closeVC(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let cdh = coreDataHandler()
+        availableTrainings = cdh.loadWorkoutsForTraining(forTraining: 1)
     }
     
     override func viewDidLoad() {
@@ -30,16 +45,25 @@ class selectedTrainingViewController: UIViewController, UITableViewDelegate, UIT
         UIView.animate(withDuration: 4, delay: 2, usingSpringWithDamping: 5, initialSpringVelocity: 5, options: .curveEaseInOut, animations: { 
              self.startWorkoutBtn.transform = CGAffineTransform(scaleX: 1, y: 1)
         }, completion: nil)
-}
+  
+        
+    }
+    
+    
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return availableTrainings.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = listOfExcercises.dequeueReusableCell(withIdentifier: "cell")
-        return cell!
+        let cell = listOfExcercises.dequeueReusableCell(withIdentifier: "cell") as! SelectedTrainingTableViewCell
+        cell.trainingCellLabel.text = availableTrainings[indexPath.row].name
+       // cell?.textLabel?.text = availableTrainings[1].name
+        
+        return cell
     }
 }

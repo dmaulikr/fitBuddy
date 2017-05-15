@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var btn: UIButton!
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
         btn.layer.cornerRadius = 20
         backgroundView.layer.cornerRadius = 12
         minLablel.layer.cornerRadius = 20
+       
         // Do any additional setup after loading the view, typically from a nib.
     }
 

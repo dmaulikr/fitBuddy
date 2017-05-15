@@ -100,6 +100,29 @@ class coreDataHandler: NSObject {
         return lastId
     }
     
+    func getLastIdTraining(forKey key: String)->Int32{
+        
+        var lastId = Int32()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext =  appDelegate?.persistentContainer.viewContext
+        do{
+            let fetchRequest : NSFetchRequest<Training> = Training.fetchRequest()
+            fetchRequest.fetchLimit = 1
+            let sortDescriptor = NSSortDescriptor(key: key, ascending: false)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            let result = try managedContext?.fetch(fetchRequest)
+            for rest in result!{
+                lastId = rest.id
+            }
+            return lastId
+        } catch{
+            print("Can't get last ID")
+            return 0
+        }
+        return lastId
+    }
+    
     
     // TRAINING
     
@@ -159,33 +182,84 @@ class coreDataHandler: NSObject {
     
         }
     }
+
     
-    func saveTrainingName(trainingName:String) {
+    //SHOW TRAINING
+    
+    //dohvati idjeve workouta pa onda novi fetch -- trebaš vratiti workouts
+    
+    //1. dohvati training id -- imamo ga iz poziva
+    //2. dohvati sve workout idjeve za taj trening
+    //3. dohvati te workoute
+
+    func loadWorkoutsForTraining(forTraining trainingId:Int32)->[Workout]{
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
+    var workouts = [Workout]()
+    var training = [Training]()
+    var workoutIdsInTraining = [Int32]()
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Training", in: managedContext)
-        let trnNm = NSManagedObject(entity: entity!, insertInto: managedContext)
-//        
-//        trnNm.setValue(training.name, forKey: "name")
-//        trnng.setValue(training.trainingId, forKey: "id")
-        
-        print("\n ***** Core data saving ***** \n")
-        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = appDelegate?.persistentContainer.viewContext
         
         do{
-            try managedContext.save()
-            print("a")
+            let fetchRequest : NSFetchRequest<Training> = Training.fetchRequest()
+           // fetchRequest.predicate = NSPredicate(format: "id == %@", trainingId)
+            let result = try managedContext?.fetch(fetchRequest)
+            print("loaded core data")
+            for wrkt in result! {
+                print("\n ID - \(wrkt.id)")
+                workoutIdsInTraining.append(wrkt.id)
+            }
+            //  self.lastID = (restaurants.last?.id)!
+            workouts = loadWorkoutsForIds(forWorkoutIds: workoutIdsInTraining)
             
-        }catch let error as NSError{
-            print("Can't save due to \(error)")
-            
+            return workouts
+    
             
         }
+        catch {
+            fatalError("Error while trying to get core data")
+        }
+    
+        return workouts
     }
+    
+    //fetch all workouts with ids
+    
+    func loadWorkoutsForIds(forWorkoutIds workoutIds: [Int32]) -> [Workout]{
+    
+        var workouts = [Workout]()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = appDelegate?.persistentContainer.viewContext
+        
+        do{
+            let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id IN %@", workoutIds)
+            let result = try managedContext?.fetch(fetchRequest)
+            for r in result!{
+                print("\n R result - \(r.name!)!")
+                
+                workouts.append(r)
+                
+            }
+            
+            for wrkt in workouts{
+                print("From workouts \(wrkt.name!)")
+            }
+            
+        }
+        
+        catch {
+            fatalError("Error while trying to fetch workouts in a training")
+        
+        }
+        
+        
+        
+        return workouts
+    }
+    
 
     
 //    func addPhotoToRestaurant(markerID: Int32, photoAddress:String){
