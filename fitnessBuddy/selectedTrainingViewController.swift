@@ -31,7 +31,8 @@ class selectedTrainingViewController: UIViewController, UITableViewDelegate, UIT
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let cdh = coreDataHandler()
-        availableTrainings = cdh.loadWorkoutsForTraining(forTraining: 1)
+        availableTrainings = cdh.loadWorkoutsForTraining(forTraining: 10)
+       // availableTrainings = cdh.loadWorkoutsForIds(forWorkoutIds: 9)
     }
     
     override func viewDidLoad() {

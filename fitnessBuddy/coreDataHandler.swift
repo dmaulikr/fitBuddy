@@ -166,6 +166,7 @@ class coreDataHandler: NSObject {
         let entity = NSEntityDescription.entity(forEntityName: "Training", in: managedContext)
         let trnng = NSManagedObject(entity: entity!, insertInto: managedContext)
         
+        print("\n last tr id = \(training.trainingId)")
         trnng.setValue(training.name, forKey: "name")
         trnng.setValue(training.trainingId, forKey: "id")
         
@@ -192,7 +193,7 @@ class coreDataHandler: NSObject {
     //2. dohvati sve workout idjeve za taj trening
     //3. dohvati te workoute
 
-    func loadWorkoutsForTraining(forTraining trainingId:Int32)->[Workout]{
+    func loadWorkoutsForTraining(forTraining trainingId:Int)->[Workout]{
         
     var workouts = [Workout]()
     var training = [Training]()
@@ -203,7 +204,8 @@ class coreDataHandler: NSObject {
         
         do{
             let fetchRequest : NSFetchRequest<Training> = Training.fetchRequest()
-           // fetchRequest.predicate = NSPredicate(format: "id == %@", trainingId)
+            print("\n Training id is \(trainingId)")
+            fetchRequest.predicate = NSPredicate(format: "id == %d", trainingId)
             let result = try managedContext?.fetch(fetchRequest)
             print("loaded core data")
             for wrkt in result! {
